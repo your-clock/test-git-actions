@@ -44,8 +44,9 @@ jobs:
           key: java-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
           restore-keys: java-${{ env.cache-name }}
       - name: Correr automatizacion
-        run: mvn test
+        run: mvn clean verify
       - name: Extraer reporte
+        if: ${{ always() }}
         uses: actions/upload-artifact@v3
         with:
           name: prueba-actions
