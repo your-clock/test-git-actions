@@ -48,7 +48,7 @@ public class TestVivaPage {
 		String monthVisible = monthCalendar.getText();
 		assertEquals(month, monthVisible);
 
-		Thread.sleep(10000);
+		Thread.sleep(9000);
 	}
 
 	@After
