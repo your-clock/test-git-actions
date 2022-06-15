@@ -1,0 +1,54 @@
+name: demo-git-actions
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'releases/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configurando Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: "11"
+          architecture: x64
+          distribution: "adopt"
+      - name: Descargar dependencias
+        run: |
+          mvn clean
+          mvn install
+          echo "Descargue las dependencias"
+      - name: Cache Maven packages
+          uses: actions/cache@v2
+          env:
+            cache-name: java-github-actions
+          with:
+            path: ~/.m2
+            key: java-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
+            restore-keys: java-${{ env.cache-name }}
+
+  test-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache Maven packages
+          uses: actions/cache@v2
+          env:
+            cache-name: java-github-actions
+          with:
+            path: ~/.m2
+            key: java-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
+            restore-keys: java-${{ env.cache-name }}
+      - name: Correr automatizacion
+        run: mvn test
+      - name: Extraer reporte
+        uses: actions/upload-artifact@v3
+        with:
+          name: prueba-actions
+          path: |
+            target/surefire-reports/emailable-report.html
+            target/surefire-reports/index.html
