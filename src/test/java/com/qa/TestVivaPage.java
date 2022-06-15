@@ -19,7 +19,7 @@ public class TestVivaPage {
 
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", "./src/test/resources/drivers-linux/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "./src/test/resources/driver-linux/chromedriver");
 		chromedriver = new ChromeDriver();
 		chromedriver.manage().window().maximize();
 		chromedriver.get("https://www.vivaair.com/#/co/es");
