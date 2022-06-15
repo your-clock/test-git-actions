@@ -30,7 +30,7 @@ jobs:
           key: java-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
           restore-keys: java-${{ env.cache-name }}
 
-  test-integration:
+  test-actions-coe:
     runs-on: ubuntu-latest
     needs: build
     steps:
