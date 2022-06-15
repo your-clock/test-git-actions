@@ -23,26 +23,26 @@ jobs:
           mvn install
           echo "Descargue las dependencias"
       - name: Cache Maven packages
-          uses: actions/cache@v2
-          env:
-            cache-name: java-github-actions
-          with:
-            path: ~/.m2
-            key: java-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
-            restore-keys: java-${{ env.cache-name }}
+        uses: actions/cache@v2
+        env:
+          cache-name: java-github-actions
+        with:
+          path: ~/.m2
+          key: java-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: java-${{ env.cache-name }}
 
   test-integration:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Cache Maven packages
-          uses: actions/cache@v2
-          env:
-            cache-name: java-github-actions
-          with:
-            path: ~/.m2
-            key: java-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
-            restore-keys: java-${{ env.cache-name }}
+        uses: actions/cache@v2
+        env:
+          cache-name: java-github-actions
+        with:
+          path: ~/.m2
+          key: java-${{ env.cache-name }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: java-${{ env.cache-name }}
       - name: Correr automatizacion
         run: mvn test
       - name: Extraer reporte
