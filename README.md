@@ -4,6 +4,8 @@ hola <mark>mundo</mark>
 
 **Table of Contents**
 
+{:toc}
+
 [TOCM]
 
 ## item1
