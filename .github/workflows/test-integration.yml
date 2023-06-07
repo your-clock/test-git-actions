@@ -7,6 +7,16 @@ on:
       - 'releases/**'
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: ejecucion bash
+        run: |
+          version=$(git tag --sort=refname -l 'v[0-999]' | tail -1)
+          echo "$version"
   build:
     runs-on: ubuntu-latest
     steps:
