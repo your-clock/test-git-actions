@@ -1,0 +1,483 @@
+{
+	"info": {
+		"_postman_id": "31175330-fc53-4803-845d-97ee7461cb9d",
+		"name": "Reloj_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "updateToken",
+			"id": "ae6a1cde-ffd8-4e37-9d9e-bef09dc6a286",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiM2UyNzkwMGUtZWMwYS00YjcyLWE4YjctMDI2OGYzYjU2NjM0IiwiaWF0IjoxNjIyOTU2ODI0fQ.cLrgBoh4Pl39WEMxM1MCRtSS1Izh5ueB6jZX_BLruCQ\"\r\n}"
+				},
+				"url": "{{url_local}}/api/token/updatetoken",
+				"description": "Request al api del inicio el cual devuelve un token actualizado"
+			},
+			"response": []
+		},
+		{
+			"name": "verifyToken",
+			"id": "23963d8d-8c48-48c4-8d91-a1c77e35f256",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiM2UyNzkwMGUtZWMwYS00YjcyLWE4YjctMDI2OGYzYjU2NjM0IiwiaWF0IjoxNjIyOTU2ODI0fQ.cLrgBoh4Pl39WEMxM1MCRtSS1Izh5ueB6jZX_BLruCQ\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_local}}/api/token/verifytoken",
+				"description": "Request al api de token el cual devuelve un 1 si el token es valido y 0 si no lo es"
+			},
+			"response": []
+		},
+		{
+			"name": "createToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f8b775c2-2490-4c73-96ad-8c385ebc15bc",
+						"exec": [
+							"pm.test(\"Body matches string\", function () {",
+							"",
+							"  let requests = pm.collectionVariables.get('collectionRequest')",
+							"  if(requests) {",
+							"    requests = JSON.parse(requests);",
+							"  } else {",
+							"    requests = [];",
+							"  }",
+							"  requests.push({data: pm.request.body.raw?.toObject() || '', url: pm.request.url.toString(), headers: pm.request.headers?.toObject() || '', method: pm.request.method});",
+							"  pm.collectionVariables.set('collectionRequest', JSON.stringify(requests));",
+							"",
+							"  let statuses = pm.collectionVariables.get('collectionStatus')",
+							"  if(statuses) {",
+							"    statuses = JSON.parse(statuses);",
+							"  } else {",
+							"    statuses = [];",
+							"  }",
+							"  statuses.push(parseInt(pm.response.code));",
+							"  pm.collectionVariables.set('collectionStatus', JSON.stringify(statuses));",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "50baaee9-b2a8-4216-9151-1bb8e8a71a0b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tokenData\": {\r\n            \"nombre\": \"RXJuZXk=\",\r\n            \"correo\": \"ZWplbXBsb0B0dWRvbWluaW8uY29t\",\r\n            \"id\": \"NWY5M2NkNTI4NjdlYjE1MmVjMjUwY2Uz\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_prod}}/api/token/createtoken"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteToken",
+			"id": "d6f6d644-2053-4433-9b85-e159795e6813",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNTM0N2FmNDEtYjkzZi00ZWY2LWE3MmItOTFiYmMzZTM3NzdlIiwiaWF0IjoxNjIxNTQxNjA5fQ.8whf47Cz8-20p0CscxAS6sbrI_iqDhQkBLFTkOLDX28\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_dev}}/api/token/deletetoken"
+			},
+			"response": []
+		},
+		{
+			"name": "auth",
+			"id": "31914fd5-db0f-4475-8e8a-d46ce1c3cde8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mail\": \"e.davidgv@hotmail.com\",\r\n    \"pass\": \"97122110420\"\r\n}"
+				},
+				"url": "{{url_local}}/api/user/auth",
+				"description": "Request al api de autenticacion sencilla, devuelve el token"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"id": "7774f2a6-79b1-449a-ac89-49e513bc3047",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mail\": \"e.davidgv@hotmail.com\",\r\n    \"pass\": \"97122110420\",\r\n    \"name1\": \"Erney\",\r\n    \"name2\": \"David\",\r\n    \"lastName1\": \"Garcia\",\r\n    \"lastName2\": \"Vergara\",\r\n    \"city\": \"Bogota\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_local}}/api/user/login",
+				"description": "Request al api de creacion de usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "verify",
+			"id": "dd598bf5-b194-4231-9ab5-bc58ecf6b72b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mail\": \"ZS5kYXZpZGd2QGhvdG1haWwuY29t\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_local}}/api/user/verify",
+				"description": "Request al api de verificacion el cual verifica la cuenta registrada"
+			},
+			"response": []
+		},
+		{
+			"name": "datos",
+			"id": "c57c0402-b61c-4fa4-9802-adf71cab8d09",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "device_id",
+						"value": "114",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"temp_amb\": 31,\r\n    \"temp_local\": 41\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_dev}}/api/reloj/datos",
+				"description": "Request al api de datos de temperatura para envio por socket"
+			},
+			"response": []
+		},
+		{
+			"name": "alarma",
+			"id": "e5128d71-3962-48aa-8606-ce5a5e100c8e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"time\": \"99:99\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_dev}}/api/reloj/alarma",
+				"description": "Request al api de alarma el cual envia la alarma a ArestIO"
+			},
+			"response": []
+		},
+		{
+			"name": "forgotpassword",
+			"id": "2b6ea61d-45e8-459f-aaa1-4c8df7c8893e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mail\": \"e.davidgv@hotmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_local}}/api/user/forgotpassword",
+				"description": "Request al api de olvide mi contraseña, envia correo para cambio de contraseña"
+			},
+			"response": []
+		},
+		{
+			"name": "recoverypassword",
+			"id": "f55ba3a7-c6e6-404a-b376-79c2a12ef558",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"NjBhNmM2YTUwMDQwYzYwMDIxODAxOWU3\",\r\n    \"pass\": \"Erney.garcia1997\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_dev}}/api/user/recoverypassword",
+				"description": "Request al api de recuperar contraseña el cual envia el id del usuario en BD y la contraseña a actualizar"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAccount",
+			"id": "4fdd9de6-9e87-4031-b258-13df4369f445",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mail\": \"ZS5kYXZpZGd2QGhvdG1haWwuY29t\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url_dev}}/api/user/deleteaccount",
+				"description": "Request al api de eliminacion de usuario\r\n\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "authGoogle",
+			"id": "71efe391-a294-4d98-9121-741b0fd81fc6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url_dev}}/api/user/auth/google"
+			},
+			"response": []
+		},
+		{
+			"name": "Thinger alarma",
+			"id": "15bac1ee-2eb9-455b-bc8b-02d36c1908bc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJFU1AzMkNMT0NLIiwiaWF0IjoxNjA0Mjk0NDczLCJqdGkiOiI1ZjlmOTc0OWI2MDdkYTYxODIyOThjZTAiLCJzdnIiOiJ1cy1lYXN0LmF3cy50aGluZ2VyLmlvIiwidXNyIjoiRGF2aWRHOTcifQ.XiJi-m6gOY8QYWn3WVisbTEtMRwD4utUu1Qp-LU09AI"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json;charset=UTF-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"in\" : \"1125\"\r\n}"
+				},
+				"url": "https://api.thinger.io/v2/users/DavidG97/devices/ESP32CLOCK/alarma"
+			},
+			"response": []
+		},
+		{
+			"name": "Thinger temperatura",
+			"id": "5df9f548-5da1-4ce2-84d0-6c09a2f5bee9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJFU1AzMkNMT0NLIiwiaWF0IjoxNjA0Mjk0NDczLCJqdGkiOiI1ZjlmOTc0OWI2MDdkYTYxODIyOThjZTAiLCJzdnIiOiJ1cy1lYXN0LmF3cy50aGluZ2VyLmlvIiwidXNyIjoiRGF2aWRHOTcifQ.XiJi-m6gOY8QYWn3WVisbTEtMRwD4utUu1Qp-LU09AI"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://backend.thinger.io/v3/users/DavidG97/devices/ESP32CLOCK/resources/temperatura"
+			},
+			"response": []
+		},
+		{
+			"name": "callback google",
+			"id": "4fcb355d-6918-4233-bbc2-38f3639377bc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url_local}}/api/user/auth/google/callback?code=4%2F0AY0e-g4sidc1hnmIdwb4fetLbdmhIRHDFDyRpUblqGjtPsMf7dIVylwKk0psOj8FE6nYWQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent#",
+					"host": [
+						"{{url_local}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"auth",
+						"google",
+						"callback"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "4%2F0AY0e-g4sidc1hnmIdwb4fetLbdmhIRHDFDyRpUblqGjtPsMf7dIVylwKk0psOj8FE6nYWQ"
+						},
+						{
+							"key": "scope",
+							"value": "email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid"
+						},
+						{
+							"key": "authuser",
+							"value": "0"
+						},
+						{
+							"key": "prompt",
+							"value": "consent"
+						}
+					],
+					"hash": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "57eb17fa-f2f1-44f0-8b37-7dc1579364a5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "981e6f7a-9028-4a19-a66b-1c91ee712905",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_prod",
+			"value": "https://your-clock.herokuapp.com"
+		},
+		{
+			"key": "url_local",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "url_dev",
+			"value": "https://your-clock-dev.herokuapp.com"
+		}
+	]
+}
