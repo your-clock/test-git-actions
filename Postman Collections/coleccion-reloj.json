@@ -102,7 +102,7 @@
 						}
 					}
 				},
-				"url": "{{url_prod}}/api/token/createtoken"
+				"url": "{{url_dev}}/api/token/createtoken"
 			},
 			"response": []
 		},
