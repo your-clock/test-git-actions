@@ -448,7 +448,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "57eb17fa-f2f1-44f0-8b37-7dc1579364a5",
+				"id": "152a6678-fc6a-4e70-8e4c-1c987c6551aa",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -458,7 +458,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "981e6f7a-9028-4a19-a66b-1c91ee712905",
+				"id": "d33a4223-46da-4894-a639-52053020f244",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -477,7 +477,7 @@
 		},
 		{
 			"key": "url_dev",
-			"value": "https://your-clock-dev.herokuapp.com"
+			"value": "https://your-clock-dev-dev.up.railway.app"
 		}
 	]
 }
